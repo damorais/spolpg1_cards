@@ -1,4 +1,4 @@
-package br.edu.ifsp.spo.java.cards;
+package br.edu.ifsp.spo.java.cards.items;
 
 public class Card {
     private final Suit suit;

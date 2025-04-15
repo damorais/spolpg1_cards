@@ -1,5 +1,6 @@
-package br.edu.ifsp.spo.java.cards;
+package br.edu.ifsp.spo.java.cards.core;
 
+import br.edu.ifsp.spo.java.cards.items.Deck;
 import br.edu.ifsp.spo.java.cards.rules.BasicScorer;
 import br.edu.ifsp.spo.java.cards.rules.Scorer;
 import br.edu.ifsp.spo.java.cards.ui.GameUI;

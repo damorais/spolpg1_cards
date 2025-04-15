@@ -1,12 +1,8 @@
 package br.edu.ifsp.spo.java.cards.rules;
 
-import br.edu.ifsp.spo.java.cards.Card;
-import br.edu.ifsp.spo.java.cards.Rank;
+import br.edu.ifsp.spo.java.cards.items.Card;
 
-import java.awt.color.ICC_ColorSpace;
 import java.util.List;
-
-import static br.edu.ifsp.spo.java.cards.Rank.*;
 
 public class BasicScorer implements Scorer{
 
