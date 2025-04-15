@@ -1,5 +1,9 @@
 package br.edu.ifsp.spo.java.cards;
 
+import br.edu.ifsp.spo.java.cards.rules.BasicScorer;
+import br.edu.ifsp.spo.java.cards.rules.Scorer;
+import br.edu.ifsp.spo.java.cards.ui.GameUI;
+
 public class Game {
 
     private Player player1;
@@ -7,13 +11,20 @@ public class Game {
 
     private Deck deck;
 
-    public Game(){
+    private Scorer scorer;
+
+    private GameUI ui;
+
+    public Game(GameUI gameUI){
+        this.ui = gameUI;
         this.initialize();
     }
 
     private void initialize(){
-        this.player1 = new Player("Ada Lovelace");
-        this.player2 = new Player("Grace Hopper");
+        this.player1 = new Player(ui.requestPlayerName(1));
+        this.player2 = new Player(ui.requestPlayerName(2));
+
+        this.scorer = new BasicScorer(); //Deve vir da seleção do jogador
 
         this.deck = new Deck();
 
