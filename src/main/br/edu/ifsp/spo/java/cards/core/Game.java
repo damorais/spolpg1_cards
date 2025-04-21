@@ -26,6 +26,7 @@ public class Game {
         this.player2 = new Player(ui.requestPlayerName(2));
 
         this.scorer = new BasicScorer(); //Deve vir da seleção do jogador
+        this.scorer = ui.requestGameMode();
 
         this.deck = new Deck();
 
@@ -42,8 +43,10 @@ public class Game {
 
         result += "\n\nPlayers:\n";
         result += "\n" + this.player1.toString();
+        result += "\nPontuação do jogador 1: " + this.scorer.calculateScore(this.player1.getHand());
         result += "\n" + this.player2.toString();
         result += "\n\nRemaining cards:" + this.deck.remainingCards();
+        result += "\nPontuação do jogador 2: " + this.scorer.calculateScore(this.player2.getHand());
 
         return result;
     }

@@ -34,4 +34,8 @@ public class Player {
     private String getName() {
         return this.name;
     }
+
+    public List<Card> getHand() {
+        return this.hand;
+    }
 }
