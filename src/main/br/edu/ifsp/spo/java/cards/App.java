@@ -8,6 +8,6 @@ public class App {
     public static void main(String[] args) {
         var vinteUm = new Game(new TerminalGameUI());
 
-        System.out.println(vinteUm);
+        vinteUm.play();
     }
 }

@@ -1,10 +1,13 @@
 package br.edu.ifsp.spo.java.cards.ui;
 
 
+import br.edu.ifsp.spo.java.cards.core.PlayerAction;
+import br.edu.ifsp.spo.java.cards.items.Card;
 import br.edu.ifsp.spo.java.cards.rules.AceElevenScorer;
 import br.edu.ifsp.spo.java.cards.rules.BasicScorer;
 import br.edu.ifsp.spo.java.cards.rules.Scorer;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class TerminalGameUI implements GameUI {
@@ -34,5 +37,15 @@ public class TerminalGameUI implements GameUI {
         }
 
         return scorer;
+    }
+
+    @Override
+    public void renderHand(List<Card> cards, int score) {
+        
+    }
+
+    @Override
+    public PlayerAction requestAction() {
+        return null;
     }
 }

@@ -37,6 +37,10 @@ public class Game {
         this.player2.receiveCard(this.deck.drawCard());
     }
 
+    public void play(){
+
+    }
+
     @Override
     public String toString(){
         var result = "Game - 21!";
