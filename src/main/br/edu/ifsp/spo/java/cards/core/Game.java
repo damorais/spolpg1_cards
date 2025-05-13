@@ -30,7 +30,7 @@ public class Game {
 
     private void initialize() {
         this.player1 = new Player(ui.requestPlayerName(1));
-        this.player2 = new Player(ui.requestPlayerName(2));
+        this.player2 = new PlayerAI();
 
         this.scorer = new BasicScorer(); //Deve vir da seleção do jogador
         this.scorer = ui.requestGameMode();
@@ -47,7 +47,7 @@ public class Game {
     public void play() {
         Optional<Player> winner = Optional.empty();
 
-        while(winner.isEmpty()){
+        while (winner.isEmpty()) {
             ui.renderGameStart();
 
             executeTurn(player1);
@@ -55,32 +55,14 @@ public class Game {
 
             winner = this.resolveWinner();
 
-            if(winner.isPresent()){
+            if (winner.isPresent()) {
                 //Apresento os resultados da partida
-                System.out.println("O vencedor é:");
-                System.out.println(winner.get());
-
-            }else{
+                ui.renderWinner(winner.get());
+            } else {
                 //Reinicio o ciclo: Descarto as mãos, distribuo as cartas e começo de novo
                 this.restart();
             }
         }
-
-
-
-//        ui.renderStartTurn(this.player1.getName());
-//
-//        PlayerAction action;
-//        do{
-//            var currentScore = this.scorer.calculateScore(this.player1.getHand());
-//            ui.renderHand(this.player1.getHand(), currentScore);
-//
-//            action = ui.requestAction();
-//
-//            if(action == PlayerAction.HIT)
-//                this.player1.receiveCard(this.deck.drawCard());
-//
-//        } while(action == PlayerAction.HIT);
     }
 
     private void restart() {
@@ -103,41 +85,52 @@ public class Game {
         do {
             var currentScore = this.scorer.calculateScore(player.getHand());
 
-            ui.renderHand(player.getHand(), currentScore);
+            if (player instanceof PlayerAI) {
+                var ia = (PlayerAI) player;
 
-            action = getAction(currentScore);
+                action = ia.makeDecision(currentScore);
 
-            switch(action){
-                case HIT -> player.receiveCard(this.deck.drawCard());
-                case BUST -> ui.renderBusted(player.getName());
-                case BLACKJACK -> ui.renderBlackjack(player.getName());
-            };
+                if (action == PlayerAction.HIT)
+                    ia.receiveCard(this.deck.drawCard());
+            } else {
+                ui.renderHand(player.getHand(), currentScore);
+
+                action = getAction(currentScore);
+
+                switch (action) {
+                    case HIT -> player.receiveCard(this.deck.drawCard());
+                    case BUST -> ui.renderBusted(player.getName());
+                    case BLACKJACK -> ui.renderBlackjack(player.getName());
+                }
+                ;
+            }
+
 
         } while (action == PlayerAction.HIT);
 
         ui.renderEndTurn(player.getName());
     }
 
-    private PlayerAction getAction(int score){
-        if(score < 21)
+    private PlayerAction getAction(int score) {
+        if (score < 21)
             return ui.requestAction();
-        else if(score > 21)
+        else if (score > 21)
             return PlayerAction.BUST;
         else
             return PlayerAction.BLACKJACK;
     }
 
-    private Optional<Player> resolveWinner(){
+    private Optional<Player> resolveWinner() {
         var scorePlayer1 = this.scorer.calculateScore(this.player1.getHand());
         var scorePlayer2 = this.scorer.calculateScore(this.player2.getHand());
 
         var isDraw = (scorePlayer1 > 21 && scorePlayer2 > 21) || (scorePlayer1 == scorePlayer2);
 
-        if (!isDraw){
+        if (!isDraw) {
 
             Optional<Player> winner = Optional.empty();
 
-            if(scorePlayer1 > 21)
+            if (scorePlayer1 > 21)
                 winner = Optional.of(this.player2);
             else if (scorePlayer2 > 21)
                 winner = Optional.of(this.player1);
@@ -145,8 +138,7 @@ public class Game {
                 winner = Optional.of(scorePlayer1 > scorePlayer2 ? this.player1 : this.player2);
 
             return winner;
-        }
-        else
+        } else
             return Optional.empty();
     }
 

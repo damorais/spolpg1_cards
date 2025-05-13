@@ -1,6 +1,6 @@
 package br.edu.ifsp.spo.java.cards.ui;
 
-
+import br.edu.ifsp.spo.java.cards.core.Player;
 import br.edu.ifsp.spo.java.cards.core.PlayerAction;
 import br.edu.ifsp.spo.java.cards.items.Card;
 import br.edu.ifsp.spo.java.cards.rules.AceElevenScorer;
@@ -68,7 +68,7 @@ public class TerminalGameUI implements GameUI {
     }
 
     @Override
-    public PlayerAction requestAction(){
+    public PlayerAction requestAction() {
         System.out.println("O que você deseja fazer?");
 
         System.out.println("(1) Comprar uma carta");
@@ -77,17 +77,23 @@ public class TerminalGameUI implements GameUI {
         var scanner = new Scanner(System.in);
         int option = scanner.nextInt();
 
-        return option == 1? PlayerAction.HIT : PlayerAction.STAND;
+        return option == 1 ? PlayerAction.HIT : PlayerAction.STAND;
     }
 
     @Override
-    public void renderBusted(String name){
+    public void renderBusted(String name) {
         System.out.println(name + " ESTOUROU!!!");
     }
 
     @Override
-    public void renderBlackjack(String name){
+    public void renderBlackjack(String name) {
         System.out.println(name + " CONSEGUIU 21!!!");
+    }
+
+    @Override
+    public void renderWinner(Player winner) {
+        System.out.println("O vencedor é:");
+        System.out.println(winner);
     }
 
     @Override

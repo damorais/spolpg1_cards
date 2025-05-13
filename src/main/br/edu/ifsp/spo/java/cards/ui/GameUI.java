@@ -1,5 +1,6 @@
 package br.edu.ifsp.spo.java.cards.ui;
 
+import br.edu.ifsp.spo.java.cards.core.Player;
 import br.edu.ifsp.spo.java.cards.core.PlayerAction;
 import br.edu.ifsp.spo.java.cards.items.Card;
 import br.edu.ifsp.spo.java.cards.rules.Scorer;
@@ -24,4 +25,6 @@ public interface GameUI {
     void renderEndTurn(String name);
 
     void renderBlackjack(String name);
+
+    void renderWinner(Player winner);
 }
