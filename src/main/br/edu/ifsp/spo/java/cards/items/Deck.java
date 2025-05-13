@@ -6,9 +6,11 @@ import java.util.List;
 
 public class Deck {
     private final List<Card> cards;
+    private final List<Card> discardedCards;
 
     public Deck() {
         this.cards = new ArrayList<>();
+        this.discardedCards = new ArrayList<>();
 
         for (var suit : Suit.values()) {
             for (var rank : Rank.values()) {
@@ -36,5 +38,9 @@ public class Deck {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public void addToDiscardPile(List<Card> cards) {
+        this.discardedCards.addAll(cards);
     }
 }

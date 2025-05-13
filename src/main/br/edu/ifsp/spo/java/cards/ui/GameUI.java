@@ -11,7 +11,17 @@ public interface GameUI {
 
     Scorer requestGameMode();
 
+    void renderGameStart();
+
+    void renderStartTurn(String playerName);
+
     void renderHand(List<Card> cards, int score);
 
     PlayerAction requestAction();
+
+    void renderBusted(String name);
+
+    void renderEndTurn(String name);
+
+    void renderBlackjack(String name);
 }

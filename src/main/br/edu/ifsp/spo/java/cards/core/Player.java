@@ -31,11 +31,19 @@ public class Player {
         return result;
     }
 
-    private String getName() {
+    public String getName() {
         return this.name;
     }
 
     public List<Card> getHand() {
         return this.hand;
+    }
+
+    public List<Card> discardHand() {
+        var discardedCards = new ArrayList<>(this.hand);
+
+        this.hand.clear();
+
+        return discardedCards;
     }
 }
